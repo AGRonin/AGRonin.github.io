@@ -1,0 +1,18 @@
+main:
+  - title: "论文发表"
+    url: /publications-cn/
+
+  - title: "演讲报告"
+    url: /talks-presentations-cn/    
+
+  - title: "博客文章"
+    url: /blog-posts-cn/
+    
+  - title: "简历"
+    url: /cv-cn/
+    
+  - title: "宝藏"
+    url: /treasure-cn/
+    
+  - title: "English"
+    url: /

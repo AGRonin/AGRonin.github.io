@@ -47,6 +47,28 @@ var toggleTheme = () => {
   setTheme(new_theme);
 };
 
+// Language toggle functionality
+function isChinesePage() {
+  var path = window.location.pathname;
+  return path === '/cn/' || path.indexOf('-cn/') !== -1;
+}
+
+function setLangText() {
+  if (isChinesePage()) {
+    document.getElementById('lang-text').textContent = 'EN';
+  } else {
+    document.getElementById('lang-text').textContent = '中文';
+  }
+}
+
+function toggleLang() {
+  if (isChinesePage()) {
+    window.location.href = '/';
+  } else {
+    window.location.href = '/cn/';
+  }
+}
+
 /* ==========================================================================
    Plotly integration script so that Markdown codeblocks will be rendered
    ========================================================================== */
@@ -101,6 +123,15 @@ $(document).ready(function () {
 
   // Enable the theme toggle
   $('#theme-toggle').on('click', toggleTheme);
+
+  // Set language text on page load
+  setLangText();
+
+  // Enable the language toggle
+  document.getElementById('lang-toggle').addEventListener('click', function(e) {
+    e.preventDefault();
+    toggleLang();
+  });
 
   // Enable the sticky footer
   var bumpIt = function () {

@@ -1,14 +1,23 @@
 {% include base_path %}
+{% if page.url contains '-cn/' or page.url == '/cn/' %}
+  {% assign lang = 'cn' %}
+  {% assign nav_data = site.data.navigation-cn.main %}
+  {% assign site_title = "杨博文" %}
+{% else %}
+  {% assign lang = 'en' %}
+  {% assign nav_data = site.data.navigation.main %}
+  {% assign site_title = site.title %}
+{% endif %}
 <div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         <button><span class="navicon"></span></button>
         <ul class="visible-links">
-          <li class="masthead__menu-item masthead__menu-item--lg persist {% if page.url == '/' or page.url == '/index.html' %}selected{% endif %}">
-            <a href="{{ base_path }}/">{{ site.title }}</a>
+          <li class="masthead__menu-item masthead__menu-item--lg persist {% if page.url == '/' or page.url == '/index.html' or page.url == '/cn/' %}selected{% endif %}">
+            <a href="{{ base_path }}{% if lang == 'cn' %}/cn{% endif %}/">{{ site_title }}</a>
           </li>
-          {% for link in site.data.navigation.main %}
+          {% for link in nav_data %}
             {% if link.url contains 'http' %}
               {% assign domain = '' %}
             {% else %}
