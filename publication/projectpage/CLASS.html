@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASS: Collaborative Lesson Plan Generation Agents</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Georgia, serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #FAF8F5;
+            font-size: 19px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            text-align: center;
+            padding: 70px 0 40px;
+            border-bottom: 1px solid #E0D8D0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin-bottom: 35px;
+            color: #222;
+            line-height: 1.4;
+        }
+
+        .authors {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .authors strong {
+            font-weight: 600;
+        }
+
+        .affiliation {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 35px;
+            line-height: 1.7;
+        }
+
+        .affiliation sup {
+            margin-right: 6px;
+        }
+
+        .footnote {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            width: 100%;
+            margin: 50px 0;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            margin: 65px 0;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #222;
+            border-bottom: 2px solid #D4C4B0;
+            padding-bottom: 12px;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .framework-img {
+            width: 100%;
+            margin: 30px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 45px 0;
+        }
+
+        .method-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 6px;
+            border: 1px solid #E0D8D0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .method-box h4 {
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            color: #222;
+            font-weight: 600;
+        }
+
+        .method-box p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 1.05rem;
+        }
+
+        .results-table th, .results-table td {
+            padding: 16px 14px;
+            text-align: center;
+            border-bottom: 1px solid #E0D8D0;
+        }
+
+        .results-table th {
+            background: #F5F3EF;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.05rem;
+        }
+
+        .results-table tr:hover {
+            background: #FAF8F5;
+        }
+
+        .best {
+            font-weight: 600;
+            color: #1a73e8;
+        }
+
+        .ablation-img {
+            width: 100%;
+            max-width: 650px;
+            margin: 30px auto;
+            display: block;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .personalized-img {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            display: block;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .citation {
+            background: #F5F3EF;
+            padding: 30px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            overflow-x: auto;
+            color: #333;
+        }
+
+        footer {
+            text-align: center;
+            padding: 45px 0;
+            border-top: 1px solid #E0D8D0;
+            margin-top: 65px;
+            color: #777;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .method-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            header {
+                padding: 50px 0 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CLASS: Collaborative Lesson Plan Generation Agents With Skill-Structure Co-Evolution</h1>
+            
+            <div class="authors">
+                <a href="https://agronin.github.io/"><strong>Bowen Yang</strong></a><sup>♣♦†</sup> &emsp;
+                <strong>Haoran Ji</strong><sup>♣†</sup> &emsp;
+                <strong>Ruohan Wang</strong><sup>♣</sup> &emsp;
+                <strong>Xixian Chen</strong><sup>♠♣</sup> &emsp;
+                <a href="https://fangweizhong.xyz/"><strong>Fangwei Zhong</strong></a><sup>♣✉</sup>
+            </div>
+            
+            <div class="affiliation">
+                <sup>♣</sup>School of Artificial Intelligence, Beijing Normal University<br>
+                <sup>♠</sup>Faculty of Psychology, Beijing Normal University<br>
+                <sup>♦</sup>School of Mathematical Sciences, Beijing Normal University
+            </div>
+            
+            <div class="footnote">
+                <sup>†</sup>Equal Contribution. &emsp;
+                <sup>✉</sup>Corresponding Author.
+            </div>
+        </header>
+
+        <img src="/files/CLASS/framework.pdf" alt="CLASS Framework Overview" class="hero-image">
+        <p>
+            The figure above illustrates the key difference between CLASS and existing approaches. On the left, the Single Agent approach directly generates lesson plans without collaboration. In the middle, Fixed-Structure Multi-Agent Systems use predefined agent roles and interaction patterns. On the right, our proposed CLASS framework adopts a multi-agent architecture with skill-structure co-evolution, enabling dynamic adaptation to different learner profiles and teaching objectives.
+        </p>
+        <section class="section">
+            <h2 class="section-title">Abstract</h2>
+            <p>
+                Personalized lesson plan generation requires coordinating multiple pedagogical skills under diverse learner profiles, yet existing systems based on large language models (LLMs) typically rely on fixed agent roles and rigid collaboration structures. To address this, we propose CLASS, a multi-agent framework that enables the co-evolution of skills and collaborative structures through a "Generate-Evaluate-Evolve" closed-loop.
+            </p>
+            <p>
+                CLASS employs a two-stage search strategy, combining tree-based local exploration for task decomposition and skill acquisition with graph-based global optimization for flexible coordination and escaping local optima. Additionally, we introduce a student modeling method based on a capability tree and construct a unified objective function to balance instructional plan quality, alignment with learner profiles, and computational cost.
+            </p>
+            <p>
+                Experimental results under an LLM-based simulated student evaluation framework show that CLASS achieves a 25.1% average improvement over the Single Agent baseline across four benchmark datasets (Algebra, MBPP, GSM8K, and RACE), while maintaining a favorable performance-cost trade-off. Through skill-structure co-evolution, CLASS attains state-of-the-art performance among the compared methods within this evaluation setting.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Framework</h2>
+            <img src="/files/CLASS/intro.pdf" alt="CLASS Framework Comparison" class="framework-img">
+            <p>
+                The CLASS framework takes as input a global teaching goal, a capability tree-based student profile, and task data.
+            </p>
+            <p>
+                CLASS models personalized instructional design as a stochastic optimization problem. Each student is represented by an ability vector derived from a capability tree. The optimization balances three objectives: instructional quality (via CIDPP evaluation), student utility, and ability gain, while minimizing computational cost.
+            </p>
+            
+            <div class="method-grid">
+                <div class="method-box">
+                    <h4>Stage 1: Tree-Based Local Search</h4>
+                    <p>
+                        The system organizes agents in a hierarchical tree structure for efficient local search. Each agent corresponds to a tree node: parent agents decompose tasks and assign subtasks to child agents, which generate instructional content. After generating a lesson plan, the system analyzes deficiencies using CIDPP feedback. Child agents then propose modifications (skill additions, structural changes), which parent agents approve or revise. This proposal-approval mechanism enables adaptive optimization while maintaining structural stability.
+                    </p>
+                </div>
+                <div class="method-box">
+                    <h4>Stage 2: Graph-Based Global Search</h4>
+                    <p>
+                        After tree-based optimization, the system transforms the tree into a directed graph for global search. Graph structure supports flexible information flow: one agent's output can feed multiple downstream agents, and agents can receive inputs from multiple sources. The optimization alternates between skill optimization (via FullSkillEvolver) and structural mutation (via StructurePlanner). When skill optimization saturates, structural mutations generate candidate configurations, introducing a competitive selection process to escape local optima.
+                    </p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 30px;">
+                This bidirectional feedback between skill evolution and structural adaptation forms a true co-evolutionary mechanism: skill optimization guides structural decisions, while new structures trigger further skill adaptation.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Experimental Results</h2>
+            <p>
+                We evaluate CLASS on four benchmark datasets: Algebra (symbolic mathematical reasoning), GSM8K (multi-step mathematical modeling), MBPP (algorithm design and code generation), and RACE (cross-sentence reasoning). The following table compares CLASS with four baseline methods:
+            </p>
+            
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Dataset</th>
+                        <th>Single Agent</th>
+                        <th>EduPlanner</th>
+                        <th>Puppeteer</th>
+                        <th>CoMAS</th>
+                        <th>CLASS (Ours)</th>
+                        <th>Improvement <br> (to Single Agent baseline)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Algebra</td>
+                        <td>40.9</td>
+                        <td>49.9</td>
+                        <td>48.3</td>
+                        <td>50.8</td>
+                        <td class="best">52.1</td>
+                        <td>+27.4%</td>
+                    </tr>
+                    <tr>
+                        <td>GSM8K</td>
+                        <td>48.8</td>
+                        <td>56.0</td>
+                        <td>55.3</td>
+                        <td>57.7</td>
+                        <td class="best">58.5</td>
+                        <td>+19.9%</td>
+                    </tr>
+                    <tr>
+                        <td>MBPP</td>
+                        <td>52.4</td>
+                        <td>48.8</td>
+                        <td>61.9</td>
+                        <td>55.7</td>
+                        <td class="best">69.4</td>
+                        <td>+32.4%</td>
+                    </tr>
+                    <tr>
+                        <td>RACE</td>
+                        <td>56.0</td>
+                        <td>65.1</td>
+                        <td>61.0</td>
+                        <td>50.4</td>
+                        <td class="best">67.6</td>
+                        <td>+20.7%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Average</strong></td>
+                        <td><strong>49.5</strong></td>
+                        <td><strong>55.0</strong></td>
+                        <td><strong>56.6</strong></td>
+                        <td><strong>53.7</strong></td>
+                        <td class="best"><strong>61.9</strong></td>
+                        <td><strong>+25.1%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top: 35px;">
+                CLASS achieves the best performance across all datasets, with an average improvement of 25.1% over the Single Agent baseline and consistent outperformance compared to EduPlanner (7.6%), Puppeteer (7.8%), and CoMAS (7.1%). The standard deviations across five independent runs are 2.00, 1.35, 2.83, and 3.61 for Algebra, GSM8K, MBPP, and RACE respectively, indicating strong experimental stability.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Ablation Study</h2>
+            <p>
+                To validate the effectiveness of the two-stage collaborative optimization strategy, we conduct ablation studies on the Algebra dataset by removing either the graph-based stage or the tree-based stage, with each setting running for 15 iterations.
+            </p>
+            <img src="/files/CLASS/AB.pdf" alt="Ablation Study Results" class="ablation-img">
+            <p>
+                The results show that combining the tree-based local search stage with the graph-based global search stage significantly improves overall performance. The tree-based stage enables efficient exploration within a constrained search space, while the graph-based stage expands the search scope to escape local optima. This two-stage design proves to be effective under our evaluation setup, demonstrating the importance of both local refinement and global exploration in the optimization process.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Personalized Learning</h2>
+            <p>
+                CLASS supports personalized education by generating lesson plans conditioned on each student's ability vector and corresponding capability tree. We conduct personalized student experiments on the Algebra dataset by simulating three students with low, medium, and high ability levels, with ability vectors of (2,2,3,3,3), (3,3,4,2,5), and (4,3,4,4,5) respectively across five dimensions: Numerical Calculation, Abstract Thinking, Logical Reasoning, Analogy Association, and Spatial Imagination.
+            </p>
+            <img src="/files/CLASS/personalized.pdf" alt="Personalized Learning Results" class="personalized-img">
+            <p>
+                CLASS achieves the highest scores for all student profiles, with an average improvement of 20.17% over Single Agent and 5.23% over EduPlanner. This demonstrates that CLASS is more effective in generating personalized lesson plans tailored to different learner profiles compared to baseline methods.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Citation</h2>
+            <div class="citation">
+                @article{yang2026class,<br>
+                &nbsp;&nbsp;title={CLASS: Collaborative Lesson Plan Generation Agents With Skill-Structure Co-Evolution},<br>
+                &nbsp;&nbsp;author={Yang, Bowen and Ji, Haoran and Wang, Ruohan and Chen, Xixian and Zhong, Fangwei},<br>
+                &nbsp;&nbsp;year={2026}<br>
+                }
+            </div>
+        </section>
+
+        <footer>
+            <p>CLASS: Collaborative Lesson Plan Generation Agents With Skill-Structure Co-Evolution</p>
+        </footer>
+    </div>
+</body>
+</html>

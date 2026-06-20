@@ -1,11 +1,12 @@
 ---
 title: "CLASS: Collaborative Lesson Plan Generation Agents With Skill-Structure Co-Evolution"
-collection: 
+collection:
 category: underreview
 permalink: /publication/CLASS
-excerpt: '<img src="/files/CLASS/intro.png" alt="Teaser Image" width="100%" style="border-radius: 5px;"> Personalized lesson plan generation requires coordinating multiple pedagogical skills under diverse learner profiles, yet existing systems based on large language models (LLMs) typically rely on fixed agent roles and rigid collaboration structures. To address this, we propose CLASS, a multi-agent framework that enables the co-evolution of skills and collaborative structures through a "Generate-Evaluate-Evolve" closed-loop.'
+excerpt: '<img src="/files/CLASS/framework.pdf" alt="Teaser Image" width="70%" style="border-radius: 5px;"><br> Personalized lesson plan generation requires coordinating multiple pedagogical skills under diverse learner profiles, yet existing systems based on large language models (LLMs) typically rely on fixed agent roles and rigid collaboration structures. To address this, we propose CLASS, a multi-agent framework that enables the co-evolution of skills and collaborative structures through a "Generate-Evaluate-Evolve" closed-loop.'
 date: 2026-05-20
 venue:
+projecturl: /publication/projectpage/CLASS
 paperurl:
 codeurl:
 arxivurl:
